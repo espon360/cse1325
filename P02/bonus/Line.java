@@ -43,7 +43,7 @@ public class Line // constructor
         }
         public String toString() // returns string as formatted in homework
         {
-                return color + " (" + x1 + "," + y1 + ") - (" + x2 + "," + y2 +
+                return color + "(" + x1 + "," + y1 + ") - (" + x2 + "," + y2 +
                 ") has length " + length(); // length method called
         }
 }
