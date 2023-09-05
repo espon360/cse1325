@@ -1,1 +1,1 @@
-public enum Color {PURPLE, ORANGE, PINK, WHITE}; // enum for colors
+public enum Color {PURPLE, ORANGE, PINK, BROWN}; // enum for colors
