@@ -6,9 +6,7 @@
 // any later version, see <https://www.gnu.org/licenses/>.
 package mdi;
 
-import library.Publication;
-import library.Library;
-import library.Video;
+import library.*;
 
 public class LibraryManager {
     public static void main(String[] args) {

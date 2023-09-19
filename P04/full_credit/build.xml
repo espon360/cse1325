@@ -8,7 +8,7 @@
   </target>
 
   <target name="javadoc" description="Compile source tree java files">
-      <javadoc packagenames="complex.*"
+      <javadoc packagenames="library.*"
            sourcepath="."
            excludepackagenames="com.dummy.test.doc-files.*"
            defaultexcludes="yes"
