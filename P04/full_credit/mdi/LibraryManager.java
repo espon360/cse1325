@@ -8,6 +8,7 @@ package mdi;
 
 import library.Publication;
 import library.Library;
+import library.Video;
 
 public class LibraryManager {
     public static void main(String[] args) {
@@ -17,9 +18,10 @@ public class LibraryManager {
             library.addPublication(new Publication("The Firm", "John Grisham", 1992));
             library.addPublication(new Publication("Foundation", "Isaac Asimov", 1951));
             library.addPublication(new Video("The Dark Knight", "Christopher Nolan", 2008, 152));
-            library.addPublication(new Video("Spider-Man: Into the Spiderverse", "Christopher Nolan", 2018, 152));
+            library.addPublication(new Video("Spider-Man: Into the Spiderverse", "Bob Persichetti", 2018, 117));
+            library.addPublication(new Video("Oppenheimer", "Christopher Nolan", 2023, 180));
             System.out.println(library);
-            int selection = Integer.parseInt(System.console().readLine("\nWhich book to check out? "));
+            int selection = Integer.parseInt(System.console().readLine("\nWhich item to check out? "));
             String patron = System.console().readLine("Who are you? ");
             library.checkOut(selection, patron);
             System.out.println(library);

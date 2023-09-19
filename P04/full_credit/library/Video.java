@@ -1,3 +1,4 @@
+package library;
 import library.Publication;
 import java.time.LocalDate;
 import java.time.Duration;
@@ -21,8 +22,8 @@ public class Video extends Publication
         public String toString()
         {
                 StringBuilder vid = new StringBuilder();
-                vid.append(super.toString() + ", runtime ");
-                vid.append(runtime);
+                vid.append("Video: " + super.toString() + ", runtime ");
+                vid.append(runtime.toMinutes() + " minutes");
                 return vid.toString();
         }
 }
