@@ -26,7 +26,12 @@ public class LibraryManager {
         menu.append(", please choose which action you'd like to take from the following menu:\n");
         menu.append("(Enter an integer as your input)n\n");
         menu.append("1) List all Publications and Videos.\n");
-        menu.append();
+        menu.append("2) Add a new Publication to the library.\n");
+        menu.append("3) Add a new Video to the library.\n");
+        menu.append("4) Check out a Publication or Video.\n");
+        menu.append("5) Check in a Publication or Video.\n");
+
+        
 
         System.out.println(library);
         int selection = Integer.parseInt(System.console().readLine("\nWhich publication to check out? "));
