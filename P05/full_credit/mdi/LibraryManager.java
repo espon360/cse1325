@@ -20,6 +20,14 @@ public class LibraryManager {
         library.addPublication(new Video("Citizen Kane", "Orson Welles", 1941, 119));
         library.addPublication(new Video("Star Wars", "George Lucas", 1977, 121));
         library.addPublication(new Video("七人の侍 (Seven Samurai)", "Akira Kurosawa", 1954, 207));
+
+        StringBuilder menu = new StringBuilder();
+        menu.append("Greetings and Welcome to " + library.name);
+        menu.append(", please choose which action you'd like to take from the following menu:\n");
+        menu.append("(Enter an integer as your input)n\n");
+        menu.append("1) List all Publications and Videos.\n");
+        menu.append();
+
         System.out.println(library);
         int selection = Integer.parseInt(System.console().readLine("\nWhich publication to check out? "));
         String patron = System.console().readLine("Who are you? ");
