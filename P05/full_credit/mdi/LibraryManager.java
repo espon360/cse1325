@@ -22,8 +22,7 @@ public class LibraryManager {
         library.addPublication(new Video("七人の侍 (Seven Samurai)", "Akira Kurosawa", 1954, 207));
 
         StringBuilder menu = new StringBuilder();
-        menu.append("Greetings and Welcome to The Library at Alexandria (Texas)");
-        menu.append(", please choose which \naction you'd like to take from the following menu:\n");
+        menu.append("\nPlease choose which action you'd like to take from the following menu:\n");
         menu.append("(Enter an integer as your input)\n\n");
         menu.append("0) Exit\n");
         menu.append("1) List all Publications and Videos.\n");
@@ -32,13 +31,12 @@ public class LibraryManager {
         menu.append("4) Check out a Publication or Video.\n");
         menu.append("5) Check in a Publication or Video.\n");
 
-        System.out.println(menu);
+        System.out.println("Greetings and Welcome to The Library at Alexandria (Texas)");
         int selection;
 
         while(true)
         {
-                try
-                {
+                    System.out.println(menu);
                     String selectionInput = System.console().readLine("Please select an action: ");
                     selection = Integer.parseInt(selectionInput);
 
@@ -101,12 +99,22 @@ public class LibraryManager {
                             publicationSelection = Integer.parseInt(publicationSelect);
                             library.checkOut(publicationSelection, patron);
                             break;
-                          }catch(Exception e) {System.err.println(e.getMessage());}
+                          }catch(IllegalArgumentException e) {System.err.println(e.getMessage());}
                         }
-                        System.out.println("\nHere's the new library:\n" + library);
-                    }
-                }catch(IllegalArgumentException e) {System.err.println(e.getMessage());}
-        }
+                          System.out.println("\nHere's the new library:\n" + library);
 
+                        case 5:
+                          int publicationOut;
+                          while(true){
+                            try{
+                              String publicationOuts = System.console().readLine("\nPlease an item to checkin: ");
+                              publicationOut = Integer.parseInt(publicationOuts);
+                              library.checkIn(publicationOut);
+                              break;
+                            }catch(IllegalArgumentException e) {System.err.println(e.getMessage());}
+                          }
+                          System.out.println("\nHere's the new library:\n" + library);
+                    }
+        }
     }
 }
