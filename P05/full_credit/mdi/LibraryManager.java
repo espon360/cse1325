@@ -22,21 +22,42 @@ public class LibraryManager {
         library.addPublication(new Video("七人の侍 (Seven Samurai)", "Akira Kurosawa", 1954, 207));
 
         StringBuilder menu = new StringBuilder();
-        menu.append("Greetings and Welcome to " + library.name);
-        menu.append(", please choose which action you'd like to take from the following menu:\n");
-        menu.append("(Enter an integer as your input)n\n");
+        menu.append("Greetings and Welcome to The Library at Alexandria (Texas)");
+        menu.append(", please choose which \naction you'd like to take from the following menu:\n");
+        menu.append("(Enter an integer as your input)\n\n");
+        menu.append("0) Exit\n");
         menu.append("1) List all Publications and Videos.\n");
         menu.append("2) Add a new Publication to the library.\n");
         menu.append("3) Add a new Video to the library.\n");
         menu.append("4) Check out a Publication or Video.\n");
         menu.append("5) Check in a Publication or Video.\n");
 
-        
+        System.out.println(menu);
+        int selection;
 
-        System.out.println(library);
-        int selection = Integer.parseInt(System.console().readLine("\nWhich publication to check out? "));
-        String patron = System.console().readLine("Who are you? ");
-        library.checkOut(selection, patron);
-        System.out.println(library);
+        //while(true)
+        //{
+                //try
+                //{
+                    String selectionInput = System.console().readLine("Please select an action: ");
+                    selection = Integer.parseInt(selectionInput);
+
+                    switch(selection)
+                    {
+                      case 0:
+                        System.out.println("Good bye!\n");
+                        System.exit(selection);
+                      case 1:
+                        System.out.println(library);
+                        break;
+                      case 2:
+                        String book = System.console().readLine("Please enter the book name: ");
+                        String writer = System.console().readLine("Please enter the author's name: ");
+                        int year = Integer.parseInt("Please enter the copyright year: ");
+                        library.addPublication(new Publication(book, writer, year));
+                    }
+                //}
+        //}
+
     }
 }
