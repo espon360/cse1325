@@ -3,9 +3,9 @@ import java.time.LocalDate;
 
 public class Publication
 {
-        public String title;
-        public String author;
-        public int copyright; // the year it is copyrighted in
+        private String title;
+        private String author;
+        private int copyright; // the year it is copyrighted in
         private String loanedTo; // patron who checked book
         private LocalDate dueDate; // when is book due (14 days after today)
 

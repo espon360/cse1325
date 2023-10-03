@@ -3,33 +3,33 @@ import java.time.LocalDate;
 
 public class Library
 {
-        private String name = "An's Library\n\n";
-        private ArrayList<Publication> publication;
+        private String name;
+        private ArrayList<Publication> publications;
 
         public Library(String name)
         {
                 this.name = name;
+                this.publications = new ArrayList<>();
         }
 
         public void addPublication(Publication publication)
         {
-                this.publication.add((Publication)(publication));
+                publications.add(publication);
         }
 
         public void checkOut(int publicationIndex, String patron)
         {
-              this.publication.get(publicationIndex).checkOut(patron);
+              publications.get(publicationIndex).checkOut(patron);
         }
 
         public String toString()
         {
                 StringBuilder s = new StringBuilder();
                 s.append(name);
-                for(int i = 0; i < publication.size(); ++i)
+                for(int i = 0; i < publications.size(); ++i)
                 {
                         s.append(i + ") \"");
-                        s.append(publication.get(i).title + "\" by " + publication.get(i).author);
-                        s.append(", copyrighted in " + publication.get(i).copyright);
+                        s.append(publications.get(i).toString() + "\n");
                 }
                 return s.toString();
         }
