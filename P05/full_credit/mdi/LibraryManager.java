@@ -35,10 +35,10 @@ public class LibraryManager {
         System.out.println(menu);
         int selection;
 
-        //while(true)
-        //{
-                //try
-                //{
+        while(true)
+        {
+                try
+                {
                     String selectionInput = System.console().readLine("Please select an action: ");
                     selection = Integer.parseInt(selectionInput);
 
@@ -50,14 +50,63 @@ public class LibraryManager {
                       case 1:
                         System.out.println(library);
                         break;
+
                       case 2:
                         String book = System.console().readLine("Please enter the book name: ");
                         String writer = System.console().readLine("Please enter the author's name: ");
-                        int year = Integer.parseInt("Please enter the copyright year: ");
-                        library.addPublication(new Publication(book, writer, year));
+                        int year;
+                        while(true)
+                        {
+                          try{
+                            String cyear = System.console().readLine("Please enter the copyright year: ");
+                            year = Integer.parseInt(cyear);
+                            try{
+                              library.addPublication(new Publication(book, writer, year));
+                              break;
+                            } catch(IllegalArgumentException e){System.err.println(e.getMessage());}
+                          }catch(Exception e) {System.err.println("That is an invalid entry, please enter a valid integer.\n");}
+                        }
+                        System.out.println("\nHere's the new library:\n" + library);
+                        break;
+
+                      case 3:
+                        String video = System.console().readLine("Please enter the movie name: ");
+                        String director = System.console().readLine("Please enter the director's name: ");
+                        int ryear;
+                        int run;
+                        while(true)
+                        {
+                          try{
+                            String cyear = System.console().readLine("Please enter the release year: ");
+                            String crun = System.console().readLine("Please enter the runtime: ");
+                            ryear = Integer.parseInt(cyear);
+                            run = Integer.parseInt(crun);
+                            try{
+                              library.addPublication(new Video(video, director, ryear, run));
+                              break;
+                            } catch(IllegalArgumentException e){System.err.println(e.getMessage());}
+                          }catch(Exception e) {System.err.println("That is an invalid entry, please enter a valid integer.\n");}
+                        }
+                        System.out.println("\nHere's the new library:\n" + library);
+                        break;
+
+                      case 4:
+                        String patron = System.console().readLine("Please enter your name: ");
+                        System.out.println(library);
+                        int publicationSelection;
+                        while(true)
+                        {
+                          try{
+                            String publicationSelect = System.console().readLine("\nPlease an item to checkout: ");
+                            publicationSelection = Integer.parseInt(publicationSelect);
+                            library.checkOut(publicationSelection, patron);
+                            break;
+                          }catch(Exception e) {System.err.println(e.getMessage());}
+                        }
+                        System.out.println("\nHere's the new library:\n" + library);
                     }
-                //}
-        //}
+                }catch(IllegalArgumentException e) {System.err.println(e.getMessage());}
+        }
 
     }
 }
