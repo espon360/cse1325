@@ -12,7 +12,7 @@ public class Publication{
                 this.copyright = copyright;
         }
 
-        public void checkOut(String patron)
+        public void checkOut(Patron patron)
         {
                 loanedTo = patron;
                 dueDate = LocalDate.now().plusDays(14);
@@ -41,6 +41,6 @@ public class Publication{
         private String title;
         private String author;
         private int copyright;
-        private String loanedTo;
+        private Patron loanedTo;
         private LocalDate dueDate;
 }
