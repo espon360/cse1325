@@ -14,6 +14,8 @@ import java.io.IOException;
 public class LibraryManager
 {
         private Library library;
+        private static final String name = "An's Library";
+
         public LibraryManager(Library library)
         {
                 this.library = library;
@@ -85,7 +87,7 @@ public class LibraryManager
                 String email = System.console().readLine("Please enter your email: ");
                 Patron patron = new Patron(name, email);
                 library.addPatron(patron);
-                System.out.println("This is the updated patron list: " + library.patronMenu());
+                System.out.println("This is the updated patron list: \n" + library.patronMenu());
         }
 
         public void checkOutPublication()
@@ -108,8 +110,88 @@ public class LibraryManager
                 }
         }
 
+        public void checkInPublication()
+        {
+                System.out.println(library);
+                String choice;
+                int publicationIndex;
+                while(true)
+                {
+                        try
+                        {
+                                choice = System.console().readLine("Please select the publication you'd like to check in (enter the number corresponding with the patron): ");
+                                publicationIndex = Integer.parseInt(choice);
+                                library.checkIn(publicationIndex);
+                        } catch (Exception e) {System.err.println("The selected publication was invalid.");}
+                }
+        }
+
         public static void main(String[] args)
         {
+                LibraryManager lm = new LibraryManager(new Library(name));
 
-        }
+                StringBuilder menu = new StringBuilder();
+                menu.append("\nPlease choose which action you'd like to take from the following menu:\n");
+                menu.append("(Enter an integer as your input)\n\n");
+                menu.append("0) Exit\n");
+                menu.append("1) List all Publications and Videos.\n");
+                menu.append("2) Add a new Publication to the library.\n");
+                menu.append("3) Add a new Video to the library.\n");
+                menu.append("4) List all Patrons.\n");
+                menu.append("5) Add a new patron to the patron list.\n");
+                menu.append("6) Check out a Publication or Video.\n");
+                menu.append("7) Check in a Publication or Video.\n");
+                menu.append("8) Save library to file.\n");
+                menu.append("9) Load library from file.\n");
+
+                System.out.print("\033[H\033[2J");
+                System.out.flush();
+
+                while(true)
+                {
+                    try
+                      {
+                        System.out.println(name + "\n" + menu.toString());
+                        int selection = Integer.parseInt(System.console().readLine("Please select an action to take: "));
+
+                        switch(selection)
+                        {
+                            case 0:
+                            System.out.println("Good bye!\n");
+                            System.exit(selection);
+
+                            case 1:
+                            lm.listPublications();
+                            break;
+
+                            case 2:
+                            lm.addPublication();
+                            break;
+
+                            case 3:
+                            lm.addVideo();
+                            break;
+
+                            case 4:
+                            lm.listPatrons();
+                            break;
+
+                            case 5:
+                            lm.addPatron();
+                            break;
+
+                            case 6:
+                            lm.checkOutPublication();
+                            break;
+
+                            case 7:
+                            lm.checkInPublication();
+                            break;
+
+                            default:
+                            throw new RuntimeException("Invalid: " + selection);
+                        }
+                      } catch (Exception e) {System.err.println(e.getMessage());}
+                }
+       }
 }

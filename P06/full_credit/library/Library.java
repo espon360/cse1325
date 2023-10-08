@@ -48,7 +48,7 @@ public class Library
         @Override
         public String toString()
         {
-                StringBuilder s = new StringBuilder(name);
+                StringBuilder s = new StringBuilder(name + "\n");
                 for(int i = 0; i < publications.size(); ++i)
                 {
                         s.append(i + ") " + publications.get(i).toString() + "\n");
