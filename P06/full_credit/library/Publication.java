@@ -43,7 +43,7 @@ public class Publication{
                 loanedTo = null;
                 dueDate = null;
         }
-
+        
         public void save(BufferedWriter bw) throws IOException
         {
                 bw.write(title + '\n');

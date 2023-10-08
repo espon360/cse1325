@@ -15,6 +15,54 @@ public class Library
                 this.patrons = new ArrayList<>();
         }
 
+        public Library(BufferedReader br) throws IOException
+        {
+                this.name = br.readLine();
+                int size = Integer.parseInt(br.readLine());
+                for(int i = 0; i < size; ++i)
+                {
+                        if(br.readLine().equals("Publication"))
+                        {
+                            this.publications.add(new Publication(br));
+                        }
+                        else if(br.readLine().equals("Video"))
+                        {
+                            this.publications.add(new Video(br));
+                        }
+                }
+                size = Integer.parseInt(br.readLine());
+                for(int i = 0; i < size; ++i)
+                {
+                        this.patrons.add(new Patron(br));
+                }
+        }
+
+        public void save(BufferedWriter bw) throws IOException
+        {
+                bw.write(name + '\n');
+                bw.write("" + publications.size() + '\n');
+                for(int i = 0; i < publications.size(); ++i)
+                {
+                        if(publications.get(i) instanceof Publication)
+                        {
+                            bw.write("Publication\n");
+                            publications.get(i).save(bw);
+                        }
+                        else if(publications.get(i) instanceof Video)
+                        {
+                            bw.write("Video\n");
+                            publications.get(i).save(bw);
+                        }
+                }
+
+                bw.write("Patrons");
+                bw.write("" + patrons.size() + '\n');
+                for(int i = 0; i < patrons.size(); ++i)
+                {
+                        patrons.get(i).save(bw);
+                }
+        }
+
         public void addPublication(Publication publication)
         {
                 publications.add(publication);

@@ -8,6 +8,7 @@ import library.Patron;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 
 
@@ -128,6 +129,15 @@ public class LibraryManager
                 }
         }
 
+        public void saveLibrary()
+        {
+                String fileName = System.console().readLine("Please enter the file name you'd like to save to: ");
+                try(BufferedWriter br = new BufferedWriter(new FileWriter(fileName)))
+                {
+                        library.save(br);
+                } catch (Exception e) {System.err.println("Failed to write: " + e);}
+        }
+
         public static void clearConsole()
         {
                 System.out.print("\033[H\033[2J");
@@ -152,8 +162,7 @@ public class LibraryManager
                 menu.append("8) Save library to file.\n");
                 menu.append("9) Load library from file.\n");
 
-                System.out.print("\033[H\033[2J");
-                System.out.flush();
+                clearConsole();
 
                 while(true)
                 {
@@ -197,6 +206,13 @@ public class LibraryManager
                             case 7:
                             lm.checkInPublication();
                             break;
+
+                            case 8:
+                            lm.saveLibrary();
+                            break;
+
+                            case 9:
+                            
 
                             default:
                             throw new RuntimeException("Invalid: " + selection);
