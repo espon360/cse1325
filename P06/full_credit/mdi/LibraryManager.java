@@ -1,3 +1,9 @@
+// Copyright 2023 An N. Duong <https://github.com/espon360/cse1325.git>
+//
+// This file is part of the Library Management System and is licensed
+// under the terms of the Gnu General Public License version 3 or
+// any later version, see <https://www.gnu.org/licenses/>.
+
 package mdi;
 
 import library.Library;
@@ -11,22 +17,46 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
+/**
+ * Manages a library through the use of a user-driven interface
+ *
+ * @author                An N. Duong
+ * @version               1.0
+ * @since                 1.0
+ * @licence.agreement     GNU General Public License 3.0
+ */
 
 public class LibraryManager
 {
         private Library library;
         private static final String name = "An's Library";
 
+        /**
+          * Creates a LibraryManager instance.
+          *
+          * @param library      the library being manipulated
+          * @since 1.0
+          */
         public LibraryManager(Library library)
         {
                 this.library = library;
         }
 
+        /**
+          * List all of the Library's Publications
+          *
+          * @since             1.0
+          */
         public void listPublications()
         {
                 System.out.println(library);
         }
 
+        /**
+          * Adds a Publication to the library
+          *
+          * @since             1.0
+          */
         public void addPublication()
         {
                 String book = System.console().readLine("Please enter the book name: ");
@@ -46,6 +76,11 @@ public class LibraryManager
                 System.out.println("Here's the new library:\n\n" + library);
         }
 
+        /**
+          * Adds a Video to the library
+          *
+          * @since             1.0
+          */
         public void addVideo()
         {
                 String video = System.console().readLine("Please enter the video name: ");
@@ -77,11 +112,21 @@ public class LibraryManager
                 System.out.println("Here's the new library:\n\n" + library);
         }
 
+        /**
+          * List all of the Library's Patrons
+          *
+          * @since             1.0
+          */
         public void listPatrons()
         {
                 System.out.println(library.patronMenu());
         }
 
+        /**
+          * Adds a Patron to the library
+          *
+          * @since             1.0
+          */
         public void addPatron()
         {
                 String name = System.console().readLine("Please enter your name: ");
@@ -91,6 +136,11 @@ public class LibraryManager
                 System.out.println("This is the updated patron list: \n\n" + library.patronMenu());
         }
 
+        /**
+          * Checks out a publication to a specified patron
+          *
+          * @since             1.0
+          */
         public void checkOutPublication()
         {
                 System.out.println(library + "\n" + library.patronMenu());
@@ -112,6 +162,11 @@ public class LibraryManager
                 System.out.println("Here's the new library:\n\n" + library);
         }
 
+        /**
+          * Checks in a publication from the Library
+          *
+          * @since             1.0
+          */
         public void checkInPublication()
         {
                 System.out.println(library);
@@ -130,6 +185,12 @@ public class LibraryManager
                 System.out.println("Here's the new library:\n\n" + library);
         }
 
+        /**
+          * Takes the name of a file and creates a library save with that name
+          *
+          * @param bw          the file you are saving to
+          * @since             1.0
+          */
         public void saveLibrary()
         {
                 String fileName = System.console().readLine("Please enter the file name you'd like to save to: ");
@@ -139,6 +200,12 @@ public class LibraryManager
                 } catch (Exception e) {System.err.println("Failed to write: " + e);}
         }
 
+        /**
+          * Takes the name of a save file and loads the library information to the LibraryManager
+          *
+          * @param br          the file you are loading from
+          * @since             1.0
+          */
         public void openLibrary()
         {
                 String fileName = System.console().readLine("Please enter the file name you'd like to load from: ");
@@ -149,12 +216,24 @@ public class LibraryManager
                 } catch (Exception e) {System.err.println("Failed to read: " + e);}
         }
 
+        /**
+          * Clears the console the user is writing on
+          *
+          * @since             1.0
+          */
         public static void clearConsole()
         {
                 System.out.print("\033[H\033[2J");
                 System.out.flush();
         }
 
+        /**
+          * Main method that creates the menu and performs tasks based on user input
+          *
+          * @param args        the command line arguments
+          * @throws RuntimeException when an invalid action is selected
+          * @since             1.0
+          */
         public static void main(String[] args)
         {
                 LibraryManager lm = new LibraryManager(new Library(name));
