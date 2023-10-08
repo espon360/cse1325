@@ -21,6 +21,11 @@ public class Library
                 patrons.add(patron);
         }
 
+        public Patron getPatron(int patronIndex)
+        {
+                return patrons.get(patronIndex);
+        }
+
         public void checkOut(int publicationIndex, Patron patron)
         {
                 try{

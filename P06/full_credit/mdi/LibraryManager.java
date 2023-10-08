@@ -84,6 +84,28 @@ public class LibraryManager
                 String name = System.console().readLine("Please enter your name: ");
                 String email = System.console().readLine("Please enter your email: ");
                 Patron patron = new Patron(name, email);
+                library.addPatron(patron);
+                System.out.println("This is the updated patron list: " + library.patronMenu());
+        }
+
+        public void checkOutPublication()
+        {
+                System.out.println(library + "\n" + library.patronMenu());
+                String choice;
+                int patronIndex;
+                int publicationIndex;
+                while(true)
+                {
+                        try
+                        {
+                                choice = System.console().readLine("Please select the patron (enter the number corresponding with the patron): ");
+                                patronIndex = Integer.parseInt(choice);
+                                choice = System.console().readLine("Please select the item to checkout (enter the number corresponding with the item): ");
+                                publicationIndex = Integer.parseInt(choice);
+                                library.checkOut(publicationIndex, library.getPatron(patronIndex));
+                                break;
+                        } catch (Exception e) {System.err.println("The selected patron or publication was invalid.");}
+                }
         }
 
         public static void main(String[] args)
