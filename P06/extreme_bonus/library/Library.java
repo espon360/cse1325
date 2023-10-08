@@ -19,21 +19,30 @@ public class Library
         {
                 this.name = br.readLine();
                 int size = Integer.parseInt(br.readLine());
+                ArrayList<Publication> pub = new ArrayList<>();
+                String check;
                 for(int i = 0; i < size; ++i)
                 {
-                        if(br.readLine().equals("Publication"))
+                        check = br.readLine();
+                        if(check.equals("Publication"))
                         {
-                            this.publications.add(new Publication(br));
+                            pub.add(new Publication(br));
                         }
-                        else if(br.readLine().equals("Video"))
+                        else if(check.equals("Video"))
                         {
-                            this.publications.add(new Video(br));
+                            pub.add(new Video(br));
                         }
                 }
-                size = Integer.parseInt(br.readLine());
-                for(int i = 0; i < size; ++i)
+                this.publications = pub;
+                if(br.readLine().equals("Patrons"))
                 {
-                        this.patrons.add(new Patron(br));
+                    ArrayList<Patron> pat = new ArrayList<>();
+                    size = Integer.parseInt(br.readLine());
+                    for(int i = 0; i < size; ++i)
+                    {
+                        pat.add(new Patron(br));
+                    }
+                    this.patrons = pat;
                 }
         }
 
@@ -45,8 +54,16 @@ public class Library
                 {
                         if(publications.get(i) instanceof Publication)
                         {
-                            bw.write("Publication\n");
-                            publications.get(i).save(bw);
+                            if(publications.get(i) instanceof Video)
+                            {
+                               bw.write("Video\n");
+                               publications.get(i).save(bw);
+                            }
+                            else
+                            {
+                               bw.write("Publication\n");
+                               publications.get(i).save(bw);
+                            }
                         }
                         else if(publications.get(i) instanceof Video)
                         {
@@ -55,7 +72,7 @@ public class Library
                         }
                 }
 
-                bw.write("Patrons");
+                bw.write("Patrons\n");
                 bw.write("" + patrons.size() + '\n');
                 for(int i = 0; i < patrons.size(); ++i)
                 {
@@ -113,7 +130,7 @@ public class Library
                 StringBuilder p = new StringBuilder("List of Patrons\n");
                 for(int i = 0; i < patrons.size(); ++i)
                 {
-                        p.append(i + ") " + patrons.get(i).toString() + "\n");
+                        p.append(i + ") " + patrons.get(i).toString());
                 }
                 return p.toString();
         }

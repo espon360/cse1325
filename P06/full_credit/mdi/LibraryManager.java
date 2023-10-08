@@ -24,7 +24,6 @@ public class LibraryManager
 
         public void listPublications()
         {
-                System.out.println("          Library Catalogue\n__________________________________________\n");
                 System.out.println(library);
         }
 
@@ -110,6 +109,7 @@ public class LibraryManager
                                 break;
                         } catch (Exception e) {System.err.println("The selected patron or publication was invalid.");}
                 }
+                System.out.println("Here's the new library:\n\n" + library);
         }
 
         public void checkInPublication()
@@ -127,6 +127,7 @@ public class LibraryManager
                                 break;
                         } catch (Exception e) {System.err.println("The selected publication was invalid.");}
                 }
+                System.out.println("Here's the new library:\n\n" + library);
         }
 
         public void saveLibrary()
@@ -170,7 +171,7 @@ public class LibraryManager
                 menu.append("6) Check out a Publication or Video.\n");
                 menu.append("7) Check in a Publication or Video.\n");
                 menu.append("8) Save library to file.\n");
-                menu.append("9) Load library from file.\n");
+                menu.append("9) Load library from file. (There is already a default library named \"save.txt\" you may load)\n");
 
                 clearConsole();
 
@@ -178,6 +179,7 @@ public class LibraryManager
                 {
                     try
                       {
+                        System.out.println("          Library Catalogue\n__________________________________________\n");
                         System.out.println(name + "\n" + menu.toString());
                         int selection = Integer.parseInt(System.console().readLine("Please select an action to take: "));
 

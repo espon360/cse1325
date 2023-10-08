@@ -27,15 +27,24 @@ public class Publication{
                     this.dueDate = null;
                 }
                 else
+                {
                     this.loanedTo = new Patron(br);
                     LocalDate date = LocalDate.parse(br.readLine());
                     this.dueDate = date;
+                }
         }
 
         public void checkOut(Patron patron)
         {
-                loanedTo = patron;
-                dueDate = LocalDate.now().plusDays(14);
+                if(loanedTo == null)
+                {
+                    loanedTo = patron;
+                    dueDate = LocalDate.now().plusDays(14);
+                }
+                else
+                {
+                    System.out.println("I'm sorry, but that item has already been checked out.\n");
+                }
         }
 
         public void checkIn()
@@ -43,7 +52,7 @@ public class Publication{
                 loanedTo = null;
                 dueDate = null;
         }
-        
+
         public void save(BufferedWriter bw) throws IOException
         {
                 bw.write(title + '\n');
@@ -52,17 +61,19 @@ public class Publication{
                 if(loanedTo == null)
                     bw.write("Checked in\n");
                 else
+                {
                     bw.write("Checked out\n");
                     loanedTo.save(bw);
                     bw.write("" + dueDate.toString() + '\n');
+                }
         }
 
         protected StringBuilder toStringBuilder(String pre, String tail)
         {
                 StringBuilder s = new StringBuilder(pre + "\"" + title + "\" ");
-                s.append("by: " + author + ", copyrighted in " + copyright + tail + ".\n");
+                s.append("by: " + author + ", copyrighted in " + copyright + tail + ".");
                 if(loanedTo != null)
-                    s.append("   loaned to: " + loanedTo + " and is due on " + dueDate + ".");
+                    s.append("\n   loaned to: " + loanedTo + " and is due on " + dueDate + ".");
                 return s;
         }
         @Override
