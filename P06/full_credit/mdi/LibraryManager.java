@@ -74,7 +74,12 @@ public class LibraryManager
                 System.out.println("Here's the new library:\n" + library);
         }
 
-        public void checkOutPublication()
+        public void listPatrons()
+        {
+                System.out.println(library.patronMenu());
+        }
+
+        public void addPatron()
         {
                 String name = System.console().readLine("Please enter your name: ");
                 String email = System.console().readLine("Please enter your email: ");
