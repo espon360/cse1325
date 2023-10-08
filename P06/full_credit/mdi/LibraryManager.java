@@ -23,7 +23,7 @@ public class LibraryManager
 
         public void listPublications()
         {
-                System.out.println("          Library Catalogue\n____________________\n");
+                System.out.println("          Library Catalogue\n__________________________________________\n");
                 System.out.println(library);
         }
 
@@ -43,7 +43,7 @@ public class LibraryManager
                 }
                 try {library.addPublication(new Publication(book, writer, year));
                 } catch (Exception e) {System.err.println("Unable to add publication.");}
-                System.out.println("Here's the new library:\n" + library);
+                System.out.println("Here's the new library:\n\n" + library);
         }
 
         public void addVideo()
@@ -51,6 +51,7 @@ public class LibraryManager
                 String video = System.console().readLine("Please enter the video name: ");
                 String director = System.console().readLine("Please enter the director's name: ");
                 int year = 0;
+
                 while(true)
                 {
                         try
@@ -68,12 +69,12 @@ public class LibraryManager
                         {
                             String crun = System.console().readLine("Please enter the runtime in minutes: ");
                             run = Integer.parseInt(crun);
-                            Video vid = new Video(video, director, year, run);
+                            library.addPublication(new Video(video, director, year, run));
                             break;
                         } catch (Video.InvalidRuntimeException e) {System.err.println(e.getMessage());}
                           catch (Exception f) {System.err.println("That is an invalid entry, please input an integer runtime.");}
                 }
-                System.out.println("Here's the new library:\n" + library);
+                System.out.println("Here's the new library:\n\n" + library);
         }
 
         public void listPatrons()
@@ -87,7 +88,7 @@ public class LibraryManager
                 String email = System.console().readLine("Please enter your email: ");
                 Patron patron = new Patron(name, email);
                 library.addPatron(patron);
-                System.out.println("This is the updated patron list: \n" + library.patronMenu());
+                System.out.println("This is the updated patron list: \n\n" + library.patronMenu());
         }
 
         public void checkOutPublication()
@@ -122,8 +123,15 @@ public class LibraryManager
                                 choice = System.console().readLine("Please select the publication you'd like to check in (enter the number corresponding with the patron): ");
                                 publicationIndex = Integer.parseInt(choice);
                                 library.checkIn(publicationIndex);
+                                break;
                         } catch (Exception e) {System.err.println("The selected publication was invalid.");}
                 }
+        }
+
+        public static void clearConsole()
+        {
+                System.out.print("\033[H\033[2J");
+                System.out.flush();
         }
 
         public static void main(String[] args)
@@ -161,6 +169,7 @@ public class LibraryManager
                             System.exit(selection);
 
                             case 1:
+                            clearConsole();
                             lm.listPublications();
                             break;
 
@@ -173,6 +182,7 @@ public class LibraryManager
                             break;
 
                             case 4:
+                            clearConsole();
                             lm.listPatrons();
                             break;
 

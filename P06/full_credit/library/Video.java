@@ -1,6 +1,10 @@
 package library;
 
 import java.time.Duration;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class Video extends Publication
 {
@@ -18,10 +22,24 @@ public class Video extends Publication
                     throw new InvalidRuntimeException(title, runtime);
                 this.runtime = Duration.ofMinutes(runtime);
         }
+
+        public Video(BufferedReader br) throws IOException
+        {
+              super(br);
+              this.runtime = Duration.ofMinutes(Long.parseLong(br.readLine()));
+        }
+
+        @Override
+        public void save(BufferedWriter bw) throws IOException
+        {
+              super.save(bw);
+              bw.write("" + Long.toString(runtime.toMinutes()) + '\n');
+        }
+
         @Override
         public String toString()
         {
-                return toStringBuilder("Video ", ", runtime: " + runtime.toMinutes() + " mintures.").toString();
+                return toStringBuilder("Video ", ", runtime: " + runtime.toMinutes() + " minutes").toString();
         }
 
         private Duration runtime;
