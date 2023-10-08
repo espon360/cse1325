@@ -18,6 +18,11 @@ public class Video extends Publication
                     throw new InvalidRuntimeException(title, runtime);
                 this.runtime = Duration.ofMinutes(runtime);
         }
+        @Override
+        public String toString()
+        {
+                return toStringBuilder("Video ", ", runtime: " + runtime.toMinutes() + " mintures.").toString();
+        }
 
         private Duration runtime;
 }
