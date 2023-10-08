@@ -8,7 +8,7 @@ public class Publication{
                 this.title = title;
                 this.author = author;
                 if(copyright < 1900 || copyright > LocalDate.now().getYear())
-                    throw new IllegalArgumentException("Invalid copyright year.");
+                    throw new IllegalArgumentException("Invalid copyright year: " + copyright);
                 this.copyright = copyright;
         }
 
