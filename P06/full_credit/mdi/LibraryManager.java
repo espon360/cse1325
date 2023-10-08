@@ -132,10 +132,20 @@ public class LibraryManager
         public void saveLibrary()
         {
                 String fileName = System.console().readLine("Please enter the file name you'd like to save to: ");
-                try(BufferedWriter br = new BufferedWriter(new FileWriter(fileName)))
+                try(BufferedWriter bw = new BufferedWriter(new FileWriter(fileName)))
                 {
-                        library.save(br);
+                        library.save(bw);
                 } catch (Exception e) {System.err.println("Failed to write: " + e);}
+        }
+
+        public void openLibrary()
+        {
+                String fileName = System.console().readLine("Please enter the file name you'd like to load from: ");
+                try(BufferedReader br = new BufferedReader(new FileReader(fileName)))
+                {
+                          Library load = new Library(br);
+                          library = load;
+                } catch (Exception e) {System.err.println("Failed to read: " + e);}
         }
 
         public static void clearConsole()
@@ -212,7 +222,8 @@ public class LibraryManager
                             break;
 
                             case 9:
-                            
+                            lm.openLibrary();
+                            break;
 
                             default:
                             throw new RuntimeException("Invalid: " + selection);
