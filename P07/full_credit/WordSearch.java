@@ -86,11 +86,47 @@ public class WordSearch {
         System.err.println ("\n" + NUM_PUZZLES + " puzzles with "
             + NUM_THREADS + " threads"); // Show the # puzzles and threads
         // Solve all puzzles
-        solve(0, 0, NUM_PUZZLES);
+
+        int solvePerThread = NUM_PUZZLES / NUM_THREADS;
+        int remainder = NUM_PUZZLES % NUM_THREADS;
+
+        int firstPuzzle = 0;
+        Thread[] threads = new Thread[NUM_THREADS];
+
+        try {
+          for(int i = 0; i < NUM_THREADS; ++i)
+          {
+            int lastPuzzle;
+            if(remainder == 0)
+            {
+                lastPuzzle = firstPuzzle + solvePerThread + 0;
+            }
+            else
+            {
+                // add a puzzle from remainder to each thread until no remainder left
+                lastPuzzle = firstPuzzle + solvePerThread + 1;
+                remainder--;
+            }
+
+            final int cThreadID = i;
+            final int cFirstPuzzle = firstPuzzle;
+            final int cLastPuzzle = lastPuzzle;
+
+            threads[i] = new Thread(() -> solve(cThreadID, cFirstPuzzle, cLastPuzzle));
+            threads[i].start();
+            firstPuzzle = lastPuzzle;
+          }
+
+          for(int i = 0; i < NUM_THREADS; ++i)
+          {
+            threads[i].join();
+          }
+        } catch (InterruptedException e) {System.err.println("Abort: " + e);}
     }
 
     public void solve(int threadID, int firstPuzzle, int lastPuzzlePlusOne) {
         System.err.println("Thread " + threadID + ": " + firstPuzzle + "-" + (lastPuzzlePlusOne-1));
+
         for(int i=firstPuzzle; i<lastPuzzlePlusOne; ++i) {
             Puzzle p = puzzles.get(i);
             Solver solver = new Solver(p);
@@ -98,7 +134,7 @@ public class WordSearch {
                 try {
                     Solution s = solver.solve(word);
                     if(s == null) System.err.println("#### Failed to solve " + p.name() + " for '" + word + "'");
-                    else solutions.add(s);
+                    else synchronized(lock) {solutions.add(s);}
                 } catch (Exception e) {
                     System.err.println("#### Exception solving " + p.name()
                         + " for " + word + ": " + e.getMessage());
@@ -117,6 +153,8 @@ public class WordSearch {
         ws.solve();
         if(ws.verbose) ws.printSolutions();
     }
+
+    private static Object lock = new Object();
 
     public final int NUM_THREADS;
     public final int NUM_PUZZLES;
