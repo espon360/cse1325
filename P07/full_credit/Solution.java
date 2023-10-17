@@ -7,7 +7,7 @@
 
 import java.util.Comparator;
 
-public class Solution implements Comparator<Solution>{
+public class Solution implements Comparable<Solution>{
 
     public Solution(String name, String word, int x, int y, Direction direction) {
         this.name = name;
@@ -18,12 +18,12 @@ public class Solution implements Comparator<Solution>{
     }
 
     @Override
-    public int compare(Solution solution1, Solution solution2)
+    public int compareTo(Solution solution)
     {
-        int nameCompare = solution1.name.compareTo(solution2.name);
+        int nameCompare = this.name.compareTo(solution.name);
         if(nameCompare == 0)
         {
-            return solution1.word.compareTo(solution2.word);
+            return this.word.compareTo(solution.word);
         }
         else
         {
