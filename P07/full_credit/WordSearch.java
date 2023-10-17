@@ -1,8 +1,17 @@
+// Copyright 2023 An Duong <https://github.com/espon360/cse1325.git>
+// Copyright 2023 George F. Rice <https://github.com/prof-rice>
+//
+// This file is part of the Library Management System and is licensed
+// under the terms of the Gnu General Public License version 3 or
+// (at your option) any later version, see <https://www.gnu.org/licenses/>.
+
 import java.util.Arrays;
 
 import java.util.List;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -114,5 +123,5 @@ public class WordSearch {
     public final boolean verbose;
 
     private List<Puzzle> puzzles = new ArrayList<>();;
-    private List<Solution> solutions = new ArrayList<>();
+    private SortedSet<Solution> solutions = new TreeSet<>();
 }
