@@ -1,4 +1,9 @@
 #include <iostream>
+#include <ostream>
+#include <istream>
+#include <iomanip>
+#include <sstream>
+#include <map>
 
 class Time
 {
@@ -15,9 +20,17 @@ class Time
         Time operator+(Time time);
         Time& operator++(); // pre-increment
         Time operator++(int); // post-increment
-        Time operator
+        inline bool operator==(const Time& time) const {return (compare(time) == 0);}
+        inline bool operator!=(const Time& time) const {return (compare(time) != 0);}
+        inline bool operator<(const Time& time) const {return (compare(time) < 0);}
+        inline bool operator>(const Time& time) const {return (compare(time) > 0);}
+        inline bool operator<=(const Time& time) const {return (compare(time) <= 0);}
+        inline bool operator>=(const Time& time) const {return (compare(time) >= 0);}
+        friend std::ostream& operator<<(std::ostream& ost, const Time& time);
+        friend std::istream& operator>>(std::istream& ist, Time& time);
 
     // methods
     private:
         void rationalize();
+        int compare(Time time) const;
 };
