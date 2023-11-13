@@ -5,26 +5,41 @@ Time::Time(int hour, int minute, int second) :
     minutes(minute),
     seconds(second){rationalize();}
 
-void Time::rationalize()
+void Time::rationalize() 
 {
-    if(this->hours < 0 || this->hours > 23 || 
-    this->minutes < 0 || this->minutes > 59 ||
-    this->seconds < 0 || this->seconds > 59)
-    {
-        this->hours = 0;
-        this->minutes = 0;
-        this->seconds = 0;
+    if (seconds < 0) {
+        minutes -= 1 + (-seconds) / 60;
+        seconds = 60 - (-seconds) % 60;
+    }
+    if (seconds >= 60) {
+        minutes += seconds / 60;
+        seconds %= 60;
+    }
+    if (minutes < 0) {
+        hours -= 1 + (-minutes) / 60;
+        minutes = 60 - (-minutes) % 60;
+    }
+    if (minutes >= 60) {
+        hours += minutes / 60;
+        minutes %= 60;
+    }
+    if (hours < 0) {
+        hours = (24 + hours % 24) % 24;
+    }
+    if (hours >= 24) {
+        hours %= 24;
     }
 }
+
 
 int Time::compare(Time time) const
 {
     if(hours < time.hours) return -1;
     if(hours > time.hours) return 1;
     if(minutes < time.minutes) return -1;
-    if(minutes < time.minutes) return 1;
+    if(minutes > time.minutes) return 1;
     if(seconds < time.seconds) return -1;
-    if(seconds < time.seconds) return 1;
+    if(seconds > time.seconds) return 1;
     // If times are equal
     return 0;
 }

@@ -1,10 +1,25 @@
-CXXFLAGS += --std=c++17
+# Compiler and compiler flags
+CXX = g++
+CXXFLAGS = -std=c++17 -Wall -Wextra
 
-testtime: TestTime.o Time.o *.h
-	$(CXX) $(CXXFLAGS) TestTime.o Time. -o testtime
-TestTime.o: TestTime.cpp *.h
-	$(CXX) $(CXXFLAGS) -c TestTime.cpp -o TestTime.o
-Time.o: Time.cpp *.h
-	$(CXX) $(CXXFLAGS) -c Time.cpp -o Time.o
+# Target executable
+TARGET = testtime
+
+# Object files
+OBJS = Time.o TestTime.o
+
+# Rule to create the executable
+$(TARGET): $(OBJS)
+	$(CXX) $(CXXFLAGS) $(OBJS) -o $(TARGET)
+
+# Rule to compile Time.cpp
+Time.o: Time.cpp Time.h
+	$(CXX) $(CXXFLAGS) -c Time.cpp
+
+# Rule to compile TestTime.cpp
+TestTime.o: TestTime.cpp Time.h
+	$(CXX) $(CXXFLAGS) -c TestTime.cpp
+
+# Clean rule
 clean:
-	rm -f *.o *.gch *~ a.out testtime
+	rm -f $(OBJS) $(TARGET)
